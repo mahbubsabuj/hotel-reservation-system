@@ -3,6 +3,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import hotelsRoute from "./routes/hotels.js";
+import authsRoute from './routes/auth.js';
 dotenv.config();
 const app = express();
 
@@ -18,6 +19,7 @@ mongoose
 //middlewares
 app.use(express.json());
 app.use(morgan("tiny"));
+app.use(`${process.env.API}/auth`, authsRoute)
 app.use(`${process.env.API}/hotels`, hotelsRoute);
 
 app.use((error, req, res, next) => {
@@ -33,3 +35,4 @@ app.use((error, req, res, next) => {
 app.listen(process.env.PORT, () => {
   console.log(`Server is running at http://localhost:${process.env.PORT}`);
 });
+

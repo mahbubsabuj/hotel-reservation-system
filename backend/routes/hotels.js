@@ -1,6 +1,4 @@
 import express from "express";
-import mongoose from "mongoose";
-import { createError } from "../utils/error.js";
 import {
   createHotel,
   deleteHotel,
