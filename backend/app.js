@@ -2,8 +2,10 @@ import express from "express";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import usersRoute from './routes/users.js';
 import hotelsRoute from "./routes/hotels.js";
 import authsRoute from './routes/auth.js';
+import cookieParser from 'cookie-parser';
 dotenv.config();
 const app = express();
 
@@ -17,9 +19,11 @@ mongoose
   });
 
 //middlewares
+app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(`${process.env.API}/auth`, authsRoute)
+app.use(`${process.env.API}/users`, usersRoute)
 app.use(`${process.env.API}/hotels`, hotelsRoute);
 
 app.use((error, req, res, next) => {

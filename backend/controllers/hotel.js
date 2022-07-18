@@ -54,7 +54,7 @@ export const getHotel = async (req, res, next) => {
   return res.status(200).json(hotel);
 };
 
-export const getHotels = async (req, res, next) => {
+export const getHotels = async (_req, res, next) => {
   const hotels = await Hotel.find();
   if (!hotels) {
     return next(createError(500, "Cannot get Hotels."));
