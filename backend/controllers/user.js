@@ -37,7 +37,7 @@ export const getUser = async (req, res, next) => {
     if (!mongoose.isValidObjectId(id)) {
         return next(createError(403, "Invalid User ID."));
     }
-    const user = await User.findById(id);
+    const user = await User.findById(id).select("-passwordHash");
     if (!user) {
         return next(createError(500, "Cannot get User."));
     }
@@ -45,7 +45,7 @@ export const getUser = async (req, res, next) => {
 };
 
 export const getUsers = async (_req, res, next) => {
-    const users = await User.find();
+    const users = await User.find().select("-passwordHash");
     if (!users) {
         return next(createError(500, "Cannot get Users."));
     }
