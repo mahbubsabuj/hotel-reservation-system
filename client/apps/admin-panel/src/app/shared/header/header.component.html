@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-icon style="padding-right: 5px">hotel</mat-icon>
+  <h2>Admin Panel</h2>
+  <div class="spacer"></div>
+  <button mat-icon-button [mat-menu-trigger-for]="profile">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #profile="matMenu" class="">
+    <button mat-menu-item><mat-icon>password</mat-icon> Change Password</button>
+    <button mat-menu-item><mat-icon>exit_to_app</mat-icon> Sign Out</button>
+  </mat-menu>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened="true">
+    <mat-nav-list>
+      <span class="mat-title" style="color: gray"> Main </span>
+      <a mat-raised-button routerLink="/dashboard" color="accent">
+        <mat-icon>dashboard</mat-icon>
+        Dashboard
+      </a>
+      <span class="mat-title" style="color: gray"> Main </span>
+      <a mat-raised-button routerLink="category" color="accent">
+        <mat-icon>group</mat-icon>
+        Users
+      </a>
+      <a mat-raised-button routerLink="products" color="accent">
+        <mat-icon>hotel</mat-icon>
+        Hotels
+      </a>
+      <a mat-raised-button routerLink="orders" color="accent">
+        <mat-icon>bedroom_parent</mat-icon>
+        Rooms
+      </a>
+      <a mat-raised-button routerLink="bills" color="accent">
+        <mat-icon>credit_card</mat-icon>
+        Delivary
+      </a>
+      <a mat-raised-button routerLink="users" color="accent">
+        <mat-icon>group</mat-icon>
+        Users
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content">
+      <router-outlet> </router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

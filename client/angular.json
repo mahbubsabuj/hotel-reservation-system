@@ -3,6 +3,10 @@
   "version": 2,
   "projects": {
     "admin-panel": "apps/admin-panel",
-    "admin-panel-e2e": "apps/admin-panel-e2e"
+    "admin-panel-e2e": "apps/admin-panel-e2e",
+    "hotels": "libs/hotels",
+    "rooms": "libs/rooms",
+    "users": "libs/users",
+    "utils": "libs/utils"
   }
 }

@@ -7,6 +7,7 @@ import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from './routes/rooms.js';
 import authsRoute from './routes/auth.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 dotenv.config();
 const app = express();
 
@@ -20,6 +21,8 @@ mongoose
   });
 
 //middlewares
+app.use(cors());
+app.options("*", cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("tiny"));

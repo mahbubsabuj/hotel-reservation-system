@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@client/hotels": ["libs/hotels/src/index.ts"],
+      "@client/rooms": ["libs/rooms/src/index.ts"],
+      "@client/users": ["libs/users/src/index.ts"],
+      "@client/utils": ["libs/utils/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

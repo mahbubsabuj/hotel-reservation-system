@@ -24,9 +24,10 @@ export const login = async (req, res, next) => {
     if (!user) {
         return next(createError(404, "User not found."));
     }
+    console.log(password, user.passwordHash)
     if (!bcryptjs.compareSync(password, user.passwordHash)) {
         return next(createError(401, "Email or password is incorrect."));
     }
     const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_TOKEN, { expiresIn: "24h" })
-    return res.cookie("token", token, { httpOnly: true }).status(200).json({ message: "Successfully Logged in." });
+    return res.status(200).json({ message: "Successfully Logged in.", token: token });
 };

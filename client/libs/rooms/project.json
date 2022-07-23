@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/rooms/src",
+  "prefix": "client",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/rooms"
+      ],
+      "options": {
+        "jestConfig": "libs/rooms/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/rooms/**/*.ts",
+          "libs/rooms/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}
