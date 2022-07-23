@@ -119,7 +119,11 @@ const routes: Route[] = [
     path: '',
     component: HomeComponent,
     canActivate: [AuthGuardService],
-    children: [{ path: 'dashboard', component: DashboardComponent }]
+    children: [
+      { path: '', component: DashboardComponent },
+      { path: 'users', component: UsersComponent },
+      { path: 'hotels', component: HotelsComponent }
+    ]
   }
 ];
 

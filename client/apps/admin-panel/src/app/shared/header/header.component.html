@@ -9,24 +9,35 @@
     <mat-icon>account_circle</mat-icon>
   </button>
   <mat-menu #profile="matMenu" class="">
-    <button mat-menu-item><mat-icon>password</mat-icon> Change Password</button>
-    <button mat-menu-item><mat-icon>exit_to_app</mat-icon> Sign Out</button>
+    <button mat-menu-item (click)="logOut()">
+      <mat-icon>exit_to_app</mat-icon> Sign Out
+    </button>
   </mat-menu>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav mode="side" opened="true">
     <mat-nav-list>
       <span class="mat-title" style="color: gray"> Main </span>
-      <a mat-raised-button routerLink="/dashboard" color="accent">
+      <a mat-raised-button routerLink="/" color="accent">
         <mat-icon>dashboard</mat-icon>
         Dashboard
       </a>
       <span class="mat-title" style="color: gray"> Main </span>
-      <a mat-raised-button routerLink="category" color="accent">
+      <a
+        mat-raised-button
+        routerLink="category"
+        color="accent"
+        routerLink="/users"
+      >
         <mat-icon>group</mat-icon>
         Users
       </a>
-      <a mat-raised-button routerLink="products" color="accent">
+      <a
+        mat-raised-button
+        routerLink="products"
+        color="accent"
+        routerLink="/hotels"
+      >
         <mat-icon>hotel</mat-icon>
         Hotels
       </a>

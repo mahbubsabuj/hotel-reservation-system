@@ -1,7 +1,7 @@
 .login-form {
-    padding: 20px;
-    width: 50%;
-    margin: auto;
+  padding: 20px;
+  width: 50%;
+  margin: auto;
   .mat-toolbar {
     margin: -24px;
     width: auto;
@@ -15,11 +15,8 @@
     width: 100%;
   }
   .actions {
-    .mat-dialog-actions {
-      .mat-raised-button {
-        height: 40px;
-        width: 70px;
-      }
+    .mat-raised-button {
+      width: 100%;
     }
   }
 }
