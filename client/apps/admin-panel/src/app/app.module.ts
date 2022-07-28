@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Route, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
@@ -59,7 +59,7 @@ import {
   PB_DIRECTION
 } from 'ngx-ui-loader';
 import { LoginComponent } from './pages/login/login.component';
-import { AuthGuardService } from '@client/users';
+import { AuthGuardService, JwtInterceptor } from '@client/users';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: 'Loading...',
@@ -149,7 +149,9 @@ const routes: Route[] = [
     HttpClientModule,
     UI_MODULES
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
