@@ -4,8 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { User, UsersService } from '@client/users';
+import { DialogData } from '@client/utils';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { take } from 'rxjs';
+import { ConfirmationComponent } from '../../components/confirmation/confirmation.component';
 
 @Component({
   selector: 'client-users',
@@ -69,21 +71,28 @@ export class UsersComponent implements OnInit {
       });
   }
   deleteUser(id: string) {
-    this.ngxService.start();
-    this.usersService
-      .deleteUser(id)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          //TODO
-          this.ngxService.stop();
-          this._getUsers();
-        },
-        error: () => {
-          //TODO
-          this.ngxService.stop();
-        }
-      });
+    const dialogData: DialogData = { message: 'delete this user' };
+    const dialogRef = this.dialog.open(ConfirmationComponent, {
+      data: dialogData
+    });
+    dialogRef.componentInstance.EmitStatusChange.subscribe(() => {
+      dialogRef.close();
+      this.ngxService.start();
+      this.usersService
+        .deleteUser(id)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            //TODO
+            this.ngxService.stop();
+            this._getUsers();
+          },
+          error: () => {
+            //TODO
+            this.ngxService.stop();
+          }
+        });
+    });
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

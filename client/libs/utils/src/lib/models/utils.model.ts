@@ -1,3 +1,4 @@
-export interface TestModel {
-    name: string;
+export interface DialogData {
+    id?: string;
+    message?: string;
 }

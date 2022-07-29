@@ -56,10 +56,11 @@ import {
   NgxUiLoaderModule,
   NgxUiLoaderConfig,
   SPINNER,
-  PB_DIRECTION
+  PB_DIRECTION,
 } from 'ngx-ui-loader';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuardService, JwtInterceptor } from '@client/users';
+import { HotelsFormComponent } from './components/hotels-form/hotels-form.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: 'Loading...',
@@ -71,7 +72,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   fgsSize: 100,
   pbThickness: 5,
   fgsType: SPINNER.ballSpinClockwise,
-  pbDirection: PB_DIRECTION.leftToRight
+  pbDirection: PB_DIRECTION.leftToRight,
 };
 
 const UI_MODULES = [
@@ -110,7 +111,7 @@ const UI_MODULES = [
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
+  NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
 ];
 
 const routes: Route[] = [
@@ -122,9 +123,9 @@ const routes: Route[] = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'users', component: UsersComponent },
-      { path: 'hotels', component: HotelsComponent }
-    ]
-  }
+      { path: 'hotels', component: HotelsComponent },
+    ],
+  },
 ];
 
 @NgModule({
@@ -138,7 +139,8 @@ const routes: Route[] = [
     UsersComponent,
     HotelsComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    HotelsFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -147,11 +149,11 @@ const routes: Route[] = [
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    UI_MODULES
+    UI_MODULES,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
