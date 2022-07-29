@@ -1,27 +1,66 @@
 <div class="hotels-form">
-    <mat-toolbar color="primary">
-      <mat-toolbar-row fxLayout="row">
-        <span class="title-center">{{
-          isEditingMode ? 'Edit Hotel' : 'Add Hotel'
-        }}</span>
-      </mat-toolbar-row>
-    </mat-toolbar>
-    <mat-dialog-content class="mat-typography">
-      <form [formGroup]="hotelsForm">
-        <div>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row fxLayout="row">
+      <span class="title-center">{{
+        isEditingMode ? 'Edit Hotel' : 'Add Hotel'
+      }}</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-dialog-content class="mat-typography">
+    <form [formGroup]="hotelsForm">
+      <div>
+        <mat-form-field appearance="fill" fxFlex>
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" required="true" />
+          <mat-error
+            *ngIf="
+              hotelsForm.controls['name'].invalid &&
+              hotelsForm.controls['name'].touched
+            "
+          >
+            <span
+              *ngIf="
+                hotelsForm.controls['name'].errors &&
+                hotelsForm.controls['name'].errors['required']
+              "
+            >
+              This Field is mendatory.</span
+            >
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="grid">
+        <div class="col-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Choose an option</mat-label>
+            <mat-select formControlName="type" placeholder="None">
+              <mat-option
+                *ngFor="let hotelType of hotelTypes"
+                [value]="hotelType"
+                >{{ hotelType }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-4">
           <mat-form-field appearance="fill" fxFlex>
-            <mat-label>Name</mat-label>
-            <input matInput formControlName="name" required="true" />
+            <mat-label>Cheapest Price</mat-label>
+            <input
+              matInput
+              formControlName="cheapestPrice"
+              type="number"
+              required="true"
+            />
             <mat-error
               *ngIf="
-                hotelsForm.controls['name'].invalid &&
-                hotelsForm.controls['name'].touched
+                hotelsForm.controls['cheapestPrice'].invalid &&
+                hotelsForm.controls['cheapestPrice'].touched
               "
             >
               <span
                 *ngIf="
-                  hotelsForm.controls['name'].errors &&
-                  hotelsForm.controls['name'].errors['required']
+                  hotelsForm.controls['cheapestPrice'].errors &&
+                  hotelsForm.controls['cheapestPrice'].errors['required']
                 "
               >
                 This Field is mendatory.</span
@@ -29,38 +68,29 @@
             </mat-error>
           </mat-form-field>
         </div>
+        <div class="col-4">
+          <mat-label>Featured</mat-label>
+          <br />
+          <mat-slide-toggle
+            formControlName="isFeatured"
+            color="primary"
+          ></mat-slide-toggle>
+        </div>
         <div class="grid">
           <div class="col-4">
-            <mat-form-field appearance="fill">
-              <mat-label>Choose an option</mat-label>
-              <mat-select formControlName="type" placeholder="None">
-                <mat-option
-                  *ngFor="let hotelType of hotelTypes"
-                  [value]="hotelType"
-                  >{{ hotelType }}</mat-option
-                >
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-4">
             <mat-form-field appearance="fill" fxFlex>
-              <mat-label>Cheapest Price</mat-label>
-              <input
-                matInput
-                formControlName="cheapestPrice"
-                type="number"
-                required="true"
-              />
+              <mat-label>City</mat-label>
+              <input matInput formControlName="city" required="true" />
               <mat-error
                 *ngIf="
-                  hotelsForm.controls['cheapestPrice'].invalid &&
-                  hotelsForm.controls['cheapestPrice'].touched
+                  hotelsForm.controls['city'].invalid &&
+                  hotelsForm.controls['city'].touched
                 "
               >
                 <span
                   *ngIf="
-                    hotelsForm.controls['cheapestPrice'].errors &&
-                    hotelsForm.controls['cheapestPrice'].errors['required']
+                    hotelsForm.controls['city'].errors &&
+                    hotelsForm.controls['city'].errors['required']
                   "
                 >
                   This Field is mendatory.</span
@@ -69,27 +99,40 @@
             </mat-form-field>
           </div>
           <div class="col-4">
-            <mat-label>Featured</mat-label>
-            <br />
-            <mat-slide-toggle
-              formControlName="isFeatured"
-              color="primary"
-            ></mat-slide-toggle>
-          </div>
-          <div class="col-12">
             <mat-form-field appearance="fill" fxFlex>
-              <mat-label>Description</mat-label>
-              <input matInput formControlName="description" required="true" />
+              <mat-label>Address</mat-label>
+              <input matInput formControlName="address" required="true" />
               <mat-error
                 *ngIf="
-                  hotelsForm.controls['description'].invalid &&
-                  hotelsForm.controls['description'].touched
+                  hotelsForm.controls['address'].invalid &&
+                  hotelsForm.controls['address'].touched
                 "
               >
                 <span
                   *ngIf="
-                    hotelsForm.controls['description'].errors &&
-                    hotelsForm.controls['description'].errors['required']
+                    hotelsForm.controls['address'].errors &&
+                    hotelsForm.controls['address'].errors['required']
+                  "
+                >
+                  This Field is mendatory.</span
+                >
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field appearance="fill" fxFlex>
+              <mat-label>Distance</mat-label>
+              <input matInput formControlName="distance" required="true" />
+              <mat-error
+                *ngIf="
+                  hotelsForm.controls['distance'].invalid &&
+                  hotelsForm.controls['distance'].touched
+                "
+              >
+                <span
+                  *ngIf="
+                    hotelsForm.controls['distance'].errors &&
+                    hotelsForm.controls['distance'].errors['required']
                   "
                 >
                   This Field is mendatory.</span
@@ -98,22 +141,44 @@
             </mat-form-field>
           </div>
         </div>
-      </form>
-    </mat-dialog-content>
-    <div class="actions">
-      <mat-dialog-actions align="center">
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          (click)="onFormSubmit()"
-          [disabled]="hotelsForm.invalid"
-        >
-          {{ isEditingMode ? 'Update' : 'Add' }}
-        </button>
-        <button mat-raised-button color="warn" mat-dialog-close="true">
-          Close
-        </button>
-      </mat-dialog-actions>
-    </div>
+        <div class="col-12">
+          <mat-form-field appearance="fill" fxFlex>
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description" required="true" />
+            <mat-error
+              *ngIf="
+                hotelsForm.controls['description'].invalid &&
+                hotelsForm.controls['description'].touched
+              "
+            >
+              <span
+                *ngIf="
+                  hotelsForm.controls['description'].errors &&
+                  hotelsForm.controls['description'].errors['required']
+                "
+              >
+                This Field is mendatory.</span
+              >
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <div class="actions">
+    <mat-dialog-actions align="center">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="onFormSubmit()"
+        [disabled]="hotelsForm.invalid"
+      >
+        {{ isEditingMode ? 'Update' : 'Add' }}
+      </button>
+      <button mat-raised-button color="warn" mat-dialog-close="true">
+        Close
+      </button>
+    </mat-dialog-actions>
   </div>
+</div>
